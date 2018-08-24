@@ -1,0 +1,78 @@
+<div class="container">
+  <div>
+    <div class="col-md-6 userReg">
+      <div class="card">
+        <header class="card-header">
+          <h4 class="card-title mt-2">Sign up</h4>
+        </header>
+        <article class="card-body">
+          <form>
+            <div class="form-row">
+              <div class="col form-group">
+                <label><span style="color: red">*</span>First name </label>
+                <input id="firstName" name="firstName" type="text" class="form-control" placeholder="" [(ngModel)]="userReg.firstName" (keyup)='firstNameValidation($event)'>
+                <div *ngIf="!firstNameVal" style="color: red">First Name is required</div>
+              </div>
+              <!-- form-group end.// -->
+              <div class="col form-group">
+                <label><span style="color: red">*</span>Last name</label>
+                <input name="lastName" type="text" class="form-control" placeholder="" [(ngModel)]="userReg.lastName">
+              </div>
+              <!-- form-group end.// -->
+            </div>
+            <!-- form-row end.// -->
+            <div class="form-group">
+              <label><span style="color: red">*</span>Email address</label>
+              <input name="emailId" type="email" class="form-control" placeholder="" [(ngModel)]="userReg.emailId">
+              <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <!-- form-group end.// -->
+            <div class="form-group">
+              <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" value="option1" selected>
+                <span class="form-check-label"> Male </span>
+              </label>
+              <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" value="option2">
+                <span class="form-check-label"> Female</span>
+              </label>
+            </div>
+            <!-- form-group end.// -->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label><span style="color: red">*</span>City</label>
+                <input type="text" class="form-control">
+              </div>
+              <!-- form-group end.// -->
+              <div class="form-group col-md-6">
+                <label>Country</label>
+                <select id="inputState" class="form-control">
+                  <option> Choose...</option>
+                  <option>Uzbekistan</option>
+                  <option>Russia</option>
+                  <option>United States</option>
+                  <option selected="">India</option>
+                  <option>Afganistan</option>
+                </select>
+              </div>
+              <!-- form-group end.// -->
+            </div>
+            <!-- form-row.// -->
+            <div class="form-group">
+              <label><span style="color: red">*</span>Create password</label>
+              <input name="password" class="form-control" type="password" [(ngModel)]="userReg.password">
+            </div>
+            <!-- form-group end.// -->
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block" (click)="registerUser()"> Register </button>
+            </div>
+            <!-- form-group// -->
+            <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our
+              <br> Terms of use and Privacy Policy.</small>
+          </form>
+        </article>
+        <div class="border-top card-body text-center">Have an account? <a href="/login">Log In</a></div>
+      </div>
+    </div>
+  </div>
+</div>
