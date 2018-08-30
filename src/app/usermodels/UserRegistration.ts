@@ -7,4 +7,6 @@ export class UserRegistration {
     password:string;
     city:string;
     country:string;
+    maleGender:boolean;
+    femaleGender:boolean;
 }

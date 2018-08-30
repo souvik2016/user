@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserRegistration} from '../usermodels/UserRegistration'
+import { UserService } from '../userservice/user.service';
 
 @Component({
   selector: 'app-userregistrationcompenent',
@@ -11,23 +12,24 @@ export class UserregistrationcompenentComponent implements OnInit {
   userReg:UserRegistration = new UserRegistration();
   firstNameVal:boolean = true;
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
   ngOnInit() {
   }
 
   registerUser(){
-    console.log('first name',this.userReg.firstName);
+    // this.userService.getUser(this.userReg.emailId).subscribe(result =>{
+    //   console.log(result.firstName);
+    // });
+    this.userService.registerUser(this.userReg).subscribe();
   }
 
   firstNameValidation(event:any){
-    console.log(event.target.value.length);
     if(event.target.value.length>0){
       this.firstNameVal=true;
     }else {
       this.firstNameVal=false;
     }
-    console.log(this.firstNameVal);
   }
 
 }
