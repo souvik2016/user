@@ -1,5 +1,5 @@
 <div class="container">
-  <div>
+  <div style="margin-top: 6%">
     <div class="col-md-6 userReg">
       <div class="card">
         <header class="card-header">
@@ -8,45 +8,57 @@
         <article class="card-body">
           <form>
             <div class="form-row">
-              <div class="col form-group">
+              <div class="col form-group" [formGroup]="userRegForm">
                 <label><span style="color: red">*</span>First name </label>
-                <input id="firstName" name="firstName" type="text" class="form-control" placeholder="" [(ngModel)]="userReg.firstName" (keyup)='firstNameValidation($event)'>
-                <div *ngIf="!firstNameVal" style="color: red">First Name is required</div>
+                <input name="firstName" type="text" class="form-control" placeholder="First Name" [(ngModel)]="userReg.firstName" formControlName="firstName" required>
+                <div *ngIf="(firstName.invalid && (firstName.dirty || firstName.touched))">
+                    <div *ngIf="firstName.errors.required" style="color: red">Please enter First Name</div>
+                </div>
               </div>
               <!-- form-group end.// -->
-              <div class="col form-group">
+              <div class="col form-group" [formGroup]="userRegForm">
                 <label><span style="color: red">*</span>Last name</label>
-                <input name="lastName" type="text" class="form-control" placeholder="" [(ngModel)]="userReg.lastName">
+                <input name="lastName" type="text" class="form-control" placeholder="Last Name" [(ngModel)]="userReg.lastName" formControlName="lastName" required>
+                <div *ngIf="(lastName.invalid && (lastName.dirty || lastName.touched))">
+                    <div *ngIf="lastName.errors.required" style="color: red">Please enter Last Name</div>
+                </div>
               </div>
               <!-- form-group end.// -->
             </div>
             <!-- form-row end.// -->
-            <div class="form-group">
+            <div class="form-group" [formGroup]="userRegForm">
               <label><span style="color: red">*</span>Email address</label>
-              <input name="emailId" type="email" class="form-control" placeholder="" [(ngModel)]="userReg.emailId">
+              <input name="email" type="email" class="form-control" placeholder="" [(ngModel)]="userReg.emailId" formControlName="email" required>
               <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+              <div *ngIf="(email.invalid && (email.dirty || email.touched))">
+                  <div *ngIf="email.errors.required" style="color: red">Please enter Email id</div>
+                  <div *ngIf="email.errors.pattern" style="color: red">Enter valid email id</div>
+              </div>
             </div>
             <!-- form-group end.// -->
             <div class="form-group">
               <label class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="M" [(ngModel)]="userReg.gender">
+                <input class="form-check-input" type="radio" name="male" value="M" [(ngModel)]="userReg.gender" >
                 <span class="form-check-label"> Male </span>
               </label>
               <label class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="F" [(ngModel)]="userReg.gender">
+                <input class="form-check-input" type="radio" name="female" value="F" [(ngModel)]="userReg.gender">
                 <span class="form-check-label"> Female</span>
               </label>
             </div>
             <!-- form-group end.// -->
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6" [formGroup]="userRegForm">
                 <label><span style="color: red">*</span>City</label>
-                <input type="text" class="form-control">
+                <input name="city" type="text" class="form-control" [(ngModel)]="userReg.city" formControlName="city" required>
+                <div *ngIf="(city.invalid && (city.dirty || city.touched))">
+                    <div *ngIf="city.errors.required" style="color: red">Please enter City</div>
+                </div>
               </div>
               <!-- form-group end.// -->
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6" [formGroup]="userRegForm">
                 <label>Country</label>
-                <select id="inputState" class="form-control">
+                <select name="country" id="inputState" class="form-control" [(ngModel)]="userReg.country" formControlName="country">
                   <option> Choose...</option>
                   <option>Uzbekistan</option>
                   <option>Russia</option>
@@ -54,17 +66,24 @@
                   <option selected="">India</option>
                   <option>Afganistan</option>
                 </select>
+                <div *ngIf="(country.invalid && (country.dirty || country.touched))">
+                    <div *ngIf="country.errors.required" style="color: red">Please enter City</div>
+                </div>
               </div>
               <!-- form-group end.// -->
             </div>
             <!-- form-row.// -->
-            <div class="form-group">
+            <div class="form-group" [formGroup]="userRegForm">
               <label><span style="color: red">*</span>Create password</label>
-              <input name="password" class="form-control" type="password" [(ngModel)]="userReg.password">
+              <input name="password" class="form-control" type="password" [(ngModel)]="userReg.password" formControlName="password" required>
+              <div *ngIf="(password.invalid && (password.dirty || password.touched))">
+                  <div *ngIf="password.errors.required" style="color: red">Please enter Password</div>
+                  <div *ngIf="password.errors.pattern" style="color: red">Password should contain Minimum eight characters, at least one letter, one number and one special character</div>
+              </div>
             </div>
             <!-- form-group end.// -->
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block" (click)="registerUser()"> Register </button>
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!userRegForm.valid" (click)="registerUser()"> Register </button>
             </div>
             <!-- form-group// -->
             <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our

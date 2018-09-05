@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserRegistration} from '../usermodels/UserRegistration'
 import { UserService } from '../userservice/user.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-userregistrationcompenent',
@@ -9,12 +10,27 @@ import { UserService } from '../userservice/user.service';
 })
 export class UserregistrationcompenentComponent implements OnInit {
 
+  userRegForm:FormGroup;
   userReg:UserRegistration = new UserRegistration();
   firstNameVal:boolean = true;
 
   constructor(private userService:UserService) { }
 
   ngOnInit() {
+    this.userRegForm = new FormGroup({
+      firstName: new FormControl('',[Validators.required]),
+      lastName: new FormControl('',[Validators.required]),
+      email : new FormControl('',[
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}')
+      ]),
+      city: new FormControl('',[Validators.required]),
+      country: new FormControl('',[Validators.required]),
+      password : new FormControl('',[
+        Validators.required,
+        Validators.pattern("^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$")
+      ])
+    });
   }
 
   registerUser(){
@@ -24,12 +40,11 @@ export class UserregistrationcompenentComponent implements OnInit {
     this.userService.registerUser(this.userReg).subscribe();
   }
 
-  firstNameValidation(event:any){
-    if(event.target.value.length>0){
-      this.firstNameVal=true;
-    }else {
-      this.firstNameVal=false;
-    }
-  }
+  get firstName() { return this.userRegForm.get('firstName'); }
+  get lastName() { return this.userRegForm.get('lastName'); }
+  get email() { return this.userRegForm.get('email'); }
+  get city() { return this.userRegForm.get('city'); }
+  get country() { return this.userRegForm.get('country'); }
+  get password() { return this.userRegForm.get('password'); }
 
 }
