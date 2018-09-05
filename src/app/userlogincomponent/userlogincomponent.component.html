@@ -22,7 +22,7 @@
                 <div *ngIf="password.errors.required || emailRequired" style="color: red">Please enter Password</div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="userLogin()">Login</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="userLogin()">Login</button>
         <div class="regUser">
           New User? <a href="/user/registration">Click here</a>
         </div>

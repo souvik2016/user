@@ -11,11 +11,13 @@ import { EmailValidatorDirective } from './userdirectives/email-validator.direct
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './userservice/user.service';
 import { WelcomeusercomponentComponent } from './welcomeusercomponent/welcomeusercomponent.component';
+import { SuccessregcomponentComponent } from './successregcomponent/successregcomponent.component';
 
 const appRoutes: Routes = [
   {path:'login',component:UserlogincomponentComponent},
   {path:'registration',component:UserregistrationcompenentComponent},
   {path:'welcome',component:WelcomeusercomponentComponent},
+  {path:'success',component:SuccessregcomponentComponent},
   {path:'',redirectTo: '/login',pathMatch: 'full'}
 ];
 
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     UserlogincomponentComponent,
     UserregistrationcompenentComponent,
     EmailValidatorDirective,
-    WelcomeusercomponentComponent
+    WelcomeusercomponentComponent,
+    SuccessregcomponentComponent
   ],
   imports: [
     BrowserModule,

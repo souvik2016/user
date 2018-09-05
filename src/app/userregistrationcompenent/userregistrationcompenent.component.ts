@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserRegistration} from '../usermodels/UserRegistration'
 import { UserService } from '../userservice/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-userregistrationcompenent',
@@ -14,7 +15,7 @@ export class UserregistrationcompenentComponent implements OnInit {
   userReg:UserRegistration = new UserRegistration();
   firstNameVal:boolean = true;
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService,public router: Router) { }
 
   ngOnInit() {
     this.userRegForm = new FormGroup({
@@ -38,6 +39,8 @@ export class UserregistrationcompenentComponent implements OnInit {
     //   console.log(result.firstName);
     // });
     this.userService.registerUser(this.userReg).subscribe();
+    this.userRegForm.reset();
+    this.router.navigate(['/success']);
   }
 
   get firstName() { return this.userRegForm.get('firstName'); }

@@ -30,7 +30,6 @@ export class UserlogincomponentComponent implements OnInit {
   }
 
   userLogin(){
-    if(this.user.emailId && this.user.password){
       this.userService.userLogin(this.user).subscribe(result=>{
         if(result){
           var firstName = result.firstName;
@@ -39,10 +38,6 @@ export class UserlogincomponentComponent implements OnInit {
           this.invalidUser = true;
         }
       });
-    } else {
-      this.emailRequired = true;
-      this.passwordRequired=true;
-    }
   }
 
   get email() { return this.userForm.get('email'); }
