@@ -32,8 +32,7 @@ export class UserlogincomponentComponent implements OnInit {
   userLogin(){
       this.userService.userLogin(this.user).subscribe(result=>{
         if(result){
-          var firstName = result.firstName;
-          this.router.navigate(['/welcome'],firstName);
+          this.router.navigate(['/welcome',{firstName:result.firstName}]);
         }else {
           this.invalidUser = true;
         }
