@@ -22,21 +22,26 @@ export class UserlogincomponentComponent implements OnInit {
   ngOnInit() {
     this.userForm = new FormGroup({
       email : new FormControl('',[
-        Validators.required,
-        Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}')
+        Validators.required
       ]),
       password : new FormControl('',[Validators.required])
     });
   }
 
   userLogin(){
-      this.userService.userLogin(this.user).subscribe(result=>{
-        if(result){
-          this.router.navigate(['/welcome',{firstName:result.firstName}]);
-        }else {
-          this.invalidUser = true;
-        }
-      });
+    if(Number(this.user.userName)){
+      this.user.mobileNo = this.user.userName;
+    }else {
+      this.user.emailId = this.user.userName;
+    }
+    this.userService.userLogin(this.user).subscribe(result=>{
+      if(result){
+        this.router.navigate(['/welcome',{firstName:result.firstName}]);
+      }else {
+        this.invalidUser = true;
+        this.userForm.reset();
+      }
+    });
   }
 
   get email() { return this.userForm.get('email'); }

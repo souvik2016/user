@@ -10,10 +10,9 @@
             <strong>Username or Password is Invalid</strong>
         </div>
         <div class="form-group">
-            <input name="email" type="email" class="form-control" [(ngModel)]="user.emailId" placeholder="Email Address" formControlName="email" autocomplete="new-username">
+            <input name="email" type="email" class="form-control" [(ngModel)]="user.userName" placeholder="Email Address or Mobile Number" formControlName="email" autocomplete="new-username">
             <div *ngIf="(email.invalid && (email.dirty || email.touched)) || emailRequired">
-                <div *ngIf="email.errors.required || emailRequired" style="color: red">Please enter Email id</div>
-                <div *ngIf="email.errors.pattern" style="color: red">Enter valid email id</div>
+                <div *ngIf="email.errors.required || emailRequired" style="color: red">Please enter User Name</div>
             </div>
         </div>
         <div class="form-group">

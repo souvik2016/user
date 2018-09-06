@@ -25,6 +25,10 @@ export class UserregistrationcompenentComponent implements OnInit {
         Validators.required,
         Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}')
       ]),
+      mobileNo: new FormControl('',[
+        Validators.required,
+        Validators.pattern('[0-9]{10}')
+      ]),
       city: new FormControl('',[Validators.required]),
       country: new FormControl('',[Validators.required]),
       password : new FormControl('',[
@@ -49,5 +53,5 @@ export class UserregistrationcompenentComponent implements OnInit {
   get city() { return this.userRegForm.get('city'); }
   get country() { return this.userRegForm.get('country'); }
   get password() { return this.userRegForm.get('password'); }
-
+  get mobileNo() { return this.userRegForm.get('mobileNo'); }
 }

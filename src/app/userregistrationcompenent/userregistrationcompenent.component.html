@@ -28,12 +28,20 @@
             <!-- form-row end.// -->
             <div class="form-group" [formGroup]="userRegForm">
               <label><span style="color: red">*</span>Email address</label>
-              <input name="email" type="email" class="form-control" placeholder="" [(ngModel)]="userReg.emailId" formControlName="email" required>
+              <input name="email" type="email" class="form-control" placeholder="Email Address" [(ngModel)]="userReg.emailId" formControlName="email" required>
               <small class="form-text text-muted">We'll never share your email with anyone else.</small>
               <div *ngIf="(email.invalid && (email.dirty || email.touched))">
                   <div *ngIf="email.errors.required" style="color: red">Please enter Email id</div>
                   <div *ngIf="email.errors.pattern" style="color: red">Enter valid email id</div>
               </div>
+            </div>
+            <div class="form-group" [formGroup]="userRegForm">
+                <label><span style="color: red">*</span>Mobile Number</label>
+                <input name="mobileNo" type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="userReg.mobileNo" formControlName="mobileNo" required>
+                <div *ngIf="(mobileNo.invalid && (mobileNo.dirty || mobileNo.touched))">
+                    <div *ngIf="mobileNo.errors.required" style="color: red">Please enter Mobile Number</div>
+                    <div *ngIf="mobileNo.errors.pattern" style="color: red">Enter valid Mobile No. It should contain 10 digits only.</div>
+                </div>
             </div>
             <!-- form-group end.// -->
             <div class="form-group">
@@ -50,14 +58,14 @@
             <div class="form-row">
               <div class="form-group col-md-6" [formGroup]="userRegForm">
                 <label><span style="color: red">*</span>City</label>
-                <input name="city" type="text" class="form-control" [(ngModel)]="userReg.city" formControlName="city" required>
+                <input name="city" type="text" class="form-control" [(ngModel)]="userReg.city" formControlName="city" placeholder="City" required>
                 <div *ngIf="(city.invalid && (city.dirty || city.touched))">
                     <div *ngIf="city.errors.required" style="color: red">Please enter City</div>
                 </div>
               </div>
               <!-- form-group end.// -->
               <div class="form-group col-md-6" [formGroup]="userRegForm">
-                <label>Country</label>
+                <label><span style="color: red">*</span>Country</label>
                 <select name="country" id="inputState" class="form-control" [(ngModel)]="userReg.country" formControlName="country">
                   <option> Choose...</option>
                   <option>Uzbekistan</option>
@@ -75,7 +83,7 @@
             <!-- form-row.// -->
             <div class="form-group" [formGroup]="userRegForm">
               <label><span style="color: red">*</span>Create password</label>
-              <input name="password" class="form-control" type="password" [(ngModel)]="userReg.password" formControlName="password" required>
+              <input name="password" class="form-control" type="password" [(ngModel)]="userReg.password" formControlName="password" placeholder="Password" required>
               <div *ngIf="(password.invalid && (password.dirty || password.touched))">
                   <div *ngIf="password.errors.required" style="color: red">Please enter Password</div>
                   <div *ngIf="password.errors.pattern" style="color: red">Password should contain Minimum eight characters, at least one letter, one number and one special character</div>
