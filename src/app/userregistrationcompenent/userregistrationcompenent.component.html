@@ -4,6 +4,9 @@
       <div class="card">
         <header class="card-header">
           <h4 class="card-title mt-2">Sign up</h4>
+          <div *ngIf="emailOrMobilePresent" class="alert alert-danger">
+              <strong>Email Id or Mobile No already exsist</strong>
+          </div>
         </header>
         <article class="card-body">
           <form>
@@ -15,7 +18,7 @@
                     <div *ngIf="firstName.errors.required" style="color: red">Please enter First Name</div>
                 </div>
               </div>
-              <!-- form-group end.// -->
+              
               <div class="col form-group" [formGroup]="userRegForm">
                 <label><span style="color: red">*</span>Last name</label>
                 <input name="lastName" type="text" class="form-control" placeholder="Last Name" [(ngModel)]="userReg.lastName" formControlName="lastName" required>
@@ -23,9 +26,9 @@
                     <div *ngIf="lastName.errors.required" style="color: red">Please enter Last Name</div>
                 </div>
               </div>
-              <!-- form-group end.// -->
+              
             </div>
-            <!-- form-row end.// -->
+            
             <div class="form-group" [formGroup]="userRegForm">
               <label><span style="color: red">*</span>Email address</label>
               <input name="email" type="email" class="form-control" placeholder="Email Address" [(ngModel)]="userReg.emailId" formControlName="email" required>
@@ -43,7 +46,7 @@
                     <div *ngIf="mobileNo.errors.pattern" style="color: red">Enter valid Mobile No. It should contain 10 digits only.</div>
                 </div>
             </div>
-            <!-- form-group end.// -->
+            
             <div class="form-group">
               <label class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="male" value="M" [(ngModel)]="userReg.gender" >
@@ -54,7 +57,7 @@
                 <span class="form-check-label"> Female</span>
               </label>
             </div>
-            <!-- form-group end.// -->
+            
             <div class="form-row">
               <div class="form-group col-md-6" [formGroup]="userRegForm">
                 <label><span style="color: red">*</span>City</label>
@@ -63,7 +66,7 @@
                     <div *ngIf="city.errors.required" style="color: red">Please enter City</div>
                 </div>
               </div>
-              <!-- form-group end.// -->
+              
               <div class="form-group col-md-6" [formGroup]="userRegForm">
                 <label><span style="color: red">*</span>Country</label>
                 <select name="country" id="inputState" class="form-control" [(ngModel)]="userReg.country" formControlName="country">
@@ -71,16 +74,16 @@
                   <option>Uzbekistan</option>
                   <option>Russia</option>
                   <option>United States</option>
-                  <option selected="">India</option>
+                  <option selected="userReg.country=='India'">India</option>
                   <option>Afganistan</option>
                 </select>
                 <div *ngIf="(country.invalid && (country.dirty || country.touched))">
                     <div *ngIf="country.errors.required" style="color: red">Please enter City</div>
                 </div>
               </div>
-              <!-- form-group end.// -->
+              
             </div>
-            <!-- form-row.// -->
+            
             <div class="form-group" [formGroup]="userRegForm">
               <label><span style="color: red">*</span>Create password</label>
               <input name="password" class="form-control" type="password" [(ngModel)]="userReg.password" formControlName="password" placeholder="Password" required>
@@ -89,11 +92,11 @@
                   <div *ngIf="password.errors.pattern" style="color: red">Password should contain Minimum eight characters, at least one letter, one number and one special character</div>
               </div>
             </div>
-            <!-- form-group end.// -->
+            
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block" [disabled]="!userRegForm.valid" (click)="registerUser()"> Register </button>
             </div>
-            <!-- form-group// -->
+            
             <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our
               <br> Terms of use and Privacy Policy.</small>
           </form>

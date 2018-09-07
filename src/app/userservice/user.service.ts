@@ -20,4 +20,8 @@ export class UserService {
     userLogin(user:UserLogin):Observable<any>{
         return this.http.post("http://localhost:8080/user/login",user);
     }
+
+    getCurrentLocation(lat,lng): Observable<any> {
+        return this.http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true");
+      }
 }

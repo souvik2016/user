@@ -14,6 +14,8 @@ export class UserregistrationcompenentComponent implements OnInit {
   userRegForm:FormGroup;
   userReg:UserRegistration = new UserRegistration();
   firstNameVal:boolean = true;
+  geolocationPosition:any;
+  emailOrMobilePresent:boolean;
 
   constructor(private userService:UserService,public router: Router) { }
 
@@ -36,15 +38,55 @@ export class UserregistrationcompenentComponent implements OnInit {
         Validators.pattern("^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$")
       ])
     });
+
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+          position => {
+              this.geolocationPosition = position
+              this.userService.getCurrentLocation(position.coords.latitude,position.coords.longitude).subscribe(result=>{
+                console.log(result);
+                result.results[0].address_components.forEach(element => {
+                  element.types.forEach(childElement=>{
+                    if(childElement == "locality"){
+                      this.userReg.city = element.long_name;
+                    }
+                    
+                    if(childElement == "country"){
+                      this.userReg.country = element.long_name;
+                    }
+                  });
+                });
+              });
+          },
+          error => {
+              switch (error.code) {
+                  case 1:
+                      console.log('Permission Denied');
+                      break;
+                  case 2:
+                      console.log('Position Unavailable');
+                      break;
+                  case 3:
+                      console.log('Timeout');
+                      break;
+              }
+          }
+      );
+  };
   }
 
   registerUser(){
     // this.userService.getUser(this.userReg.emailId).subscribe(result =>{
     //   console.log(result.firstName);
     // });
-    this.userService.registerUser(this.userReg).subscribe();
+    this.userService.registerUser(this.userReg).subscribe(result=>{
+      if(result){
+        this.router.navigate(['/success']);
+      }else {
+        this.emailOrMobilePresent = true;
+      }
+    });
     this.userRegForm.reset();
-    this.router.navigate(['/success']);
   }
 
   get firstName() { return this.userRegForm.get('firstName'); }
