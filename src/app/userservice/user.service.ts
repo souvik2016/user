@@ -22,6 +22,6 @@ export class UserService {
     }
 
     getCurrentLocation(lat,lng): Observable<any> {
-        return this.http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true");
+        return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true");
       }
 }
